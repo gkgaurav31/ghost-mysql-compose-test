@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql:8-debian
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  ghost:
+    image: gkgaurav31/ghost
+    ports:
+      - 8080:2368
+      - 2222:2222
+    environment:
+      # see https://ghost.org/docs/config/#configuration-options
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: example
+      database__connection__database: ghost
+      # this url value is just an example, and is likely wrong for your environment!
+      url: http://localhost:8080
+      # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
+      #NODE_ENV: development
+    depends_on:
+      - db
