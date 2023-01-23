@@ -8,6 +8,8 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site/wwwroot/mysql:/var/lib/mysql
 
   ghost:
     image: gkgaurav31/ghost
@@ -22,8 +24,10 @@ services:
       database__connection__password: example
       database__connection__database: ghost
       # this url value is just an example, and is likely wrong for your environment!
-      url: http://localhost:8080/
+      url: https://gauk-compose-test.azurewebsites.net/
       # contrary to the default mentioned in the linked documentation, this image defaults to NODE_ENV=production (so development mode needs to be explicitly specified if desired)
       #NODE_ENV: development
+    volumes:
+      - ${WEBAPP_STORAGE_HOME}/site/wwwroot/ghost:/var/lib/ghost/content
     depends_on:
       - db
