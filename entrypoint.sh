@@ -6,6 +6,9 @@ set -e
 #ifconfig
 #nslookup db
 
+#test
+rm /home/site/wwwroot/mysql/mysql.sock
+
 service ssh start
 
 sleep 30 #wait for db to start
