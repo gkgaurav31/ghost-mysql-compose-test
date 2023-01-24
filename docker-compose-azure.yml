@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   db:
-    image: cytopia/mysql-5.7 #set MYSQL_SOCKET_DIR=/var/sock/mysqld
+    image: mysql:5.7 #add MYSQL_UNIX_PORT=/var/sock/mysqld
     ports:
       - 3306:3306
     environment:
